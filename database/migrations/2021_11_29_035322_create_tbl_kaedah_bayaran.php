@@ -15,10 +15,6 @@ class CreateTblKaedahBayaran extends Migration
     {
         Schema::create('tbl_kaedah_bayaran', function (Blueprint $table) {
             $table->id();
-
-            $table->unsignedBigInteger('bayaran_id');
-            $table->foreign('bayaran_id')->references('id')->on('tbl_bayaran');
-
             $table->timestamps();
         });
     }

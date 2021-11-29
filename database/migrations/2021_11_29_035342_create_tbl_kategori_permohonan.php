@@ -15,10 +15,6 @@ class CreateTblKategoriPermohonan extends Migration
     {
         Schema::create('tbl_kategori_permohonan', function (Blueprint $table) {
             $table->id();
-
-            $table->unsignedBigInteger('permohonan_id');
-            $table->foreign('permohonan_id')->references('id')->on('tbl_permohonan');
-
             $table->timestamps();
         });
     }

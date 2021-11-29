@@ -8,6 +8,25 @@
                 <div class="card-header">{{ __('Main') }}</div>
 
                 <div class="card-body">
+
+                    @can('isLP')
+                        <a class="btn btn-primary">
+                            Your are LP Admin yang kayangan
+                        </a>
+                    @endcan
+
+                    @can('isPPD')
+                        <a class="btn btn-warning">
+                            Your are PPD yang selalu kacau cikgu
+                        </a>
+                    @endcan
+
+                    @can('isEjen')
+                        <a class="btn btn-success">
+                            Your are Ejen Ali The Movie
+                        </a>
+                    @endcan
+
                     @if (session('status'))
                         <div class="alert alert-success" role="alert">
                             {{ session('status') }}
