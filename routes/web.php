@@ -29,4 +29,6 @@ Route::get('/todos/{todo}/edit', [App\Http\Controllers\TodoController::class, 'e
 Route::post('/todos/{todo}/edit', [App\Http\Controllers\TodoController::class, 'update']);
 Route::get('/todos/{todo}/delete', [App\Http\Controllers\TodoController::class, 'delete']);
 
-Route::get('/ejen/senarai-permohonan', [App\Http\Controllers\PermohonanController, 'index']);
+Route::get('/ejen/senarai-permohonan', [App\Http\Controllers\Ejen\PermohonanController::class, 'index']);
+Route::get('/ejen/senarai-permohonan/create', [App\Http\Controllers\Ejen\PermohonanController::class, 'create'])->middleware('auth');
+Route::post('/ejen/senarai-permohonan/store', [App\Http\Controllers\Ejen\PermohonanController::class, 'store']);

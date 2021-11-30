@@ -49,12 +49,12 @@ class User extends Authenticatable
 
     public  function pengalamanEjen()
     {
-        return $this->hasMany(PengalamanEjen::all, 'user_id', 'id');
+        return $this->hasMany(PengalamanEjen::class, 'user_id', 'id');
     }
 
     public  function permohonan()
     {
-        return $this->hasMany(Permohonan::all, 'user_id', 'id');
+        return $this->hasMany(Permohonan::class, 'user_id', 'id');
     }
     
 }

@@ -11,19 +11,19 @@
 
                     @can('isLP')
                         <a class="btn btn-primary">
-                            Your are LP Admin yang kayangan
+                            LP Admin
                         </a>
                     @endcan
 
                     @can('isPPD')
                         <a class="btn btn-warning">
-                            Your are PPD yang selalu kacau cikgu
+                            PPD
                         </a>
                     @endcan
 
                     @can('isEjen')
                         <a class="btn btn-success">
-                            Your are Ejen Ali The Movie
+                            Ejen
                         </a>
                     @endcan
 
@@ -33,7 +33,7 @@
                         </div>
                     @endif
 
-                    {{ __('You are logged in!') }}
+                    {{ __('Anda telah log masuk!') }}
                 </div>
             </div>
         </div>
