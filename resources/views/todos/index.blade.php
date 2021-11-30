@@ -4,57 +4,68 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
+        
             @if(session()->has('message'))
                 <div class="alert {{ session()->get('type') }}">
                     {{ session()->get('message') }}
                 </div>
             @endif
             <div class="card">
-                <div class="card-header">
-                    {{ __('Todos Index') }}
+                <table class="table table-responsive">
+                    <div class="card-header">
+                        {{ __('Todos Index') }}
 
-                    <div class="float-right">
-                        <form action="" method="">
-                            <div class="input-group">
-                                <input type="text" class="form-control" name="keyword" value="{{ request()->get('keyword') }}">
-                                <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">Search</button>
+                        <div class="float-right">
+                            <form action="" method="">
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="keyword" value="{{ request()->get('keyword') }}">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="submit">Search</button>
+                                    </div>
                                 </div>
-                            </div>
-                        </form>
+                            </form>
+                        </div>
                     </div>
-                </div>
 
-                <div class="card-body">
-                    <table class="table">
-                        <thead>
-                            <th>ID</th>
-                            <th>Title</th>
-                            <th>Description</th>
-                            <th>Created</th>
-                            <th>Creator</th>
-                            <th>Actions</th>
-                        </thead>
-                        <tbody>
-                            @foreach ($todos as $todo)
-                                <tr>
-                                    <td> {{ $todo->id }}</td>
-                                    <td> {{ $todo->title }}</td>
-                                    <td> {{ $todo->description }}</td>
-                                    <td> {{ $todo->created_at->diffForHumans() }}</td>
-                                    <td> {{ $todo->user->name }}</td>
-                                    <td>
-                                        <a class="btn btn-primary" href="/todos/{{ $todo->id}}">Show</a>
-                                        <a class="btn btn-success" href="/todos/{{ $todo->id}}/edit">Edit</a>
-                                        <a onclick="return confirm('Are you sure')" class="btn btn-danger" href="/todos/{{ $todo->id}}/delete">Delete</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <th>ID</th>
+                                <th>Title</th>
+                                <th>Description</th>
+                                <th>Created</th>
+                                <th>Creator</th>
+                                <th>Actions</th>
+                            </thead>
+                            <tbody>
+                                @foreach ($todos as $todo)
+                                    <tr>
+                                        <td> {{ $todo->id }}</td>
+                                        <td> {{ $todo->title }}</td>
+                                        <td> {{ $todo->description }}</td>
+                                        <td> {{ $todo->created_at->diffForHumans() }}</td>
+                                        <td> {{ $todo->user->name }}</td>
+                                        <td>
+                                            @can('show',$todo)
+                                                <a class="btn btn-primary" href="/todos/{{ $todo->id}}">Papar</a>
+                                            @endcan
+                                            @can('edit',$todo)
+                                                <a class="btn btn-success" href="/todos/{{ $todo->id}}/edit">Kemaskini</a>
+                                            @endcan
+                                            @can('delete',$todo)
+                                                <a onclick="return confirm('Are you sure')" class="btn btn-danger" href="/todos/{{ $todo->id}}/delete">Padam</a>
+                                            @endcan
+                                            <hr>
+                                            @can('delete',$todo)
+                                                <a onclick="return confirm('Are you sure')" class="btn btn-danger" href="/todos/{{ $todo->id}}/force-delete">Kalau tekan BERDOSA!</a>
+                                            @endcan
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            </tbody>
+                        </table>
                     {{ $todos->links() }}
-
-                </div>
+                </table>
             </div>
         </div>
     </div>

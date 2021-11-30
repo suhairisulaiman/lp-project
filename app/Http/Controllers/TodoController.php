@@ -26,6 +26,9 @@ class TodoController extends Controller
             $user = auth()->user();
             $todos = $user->todos()->paginate(3);
         }
+        
+        // paginate sini akan overwrite yang atas, jadi kena letak juga kat sini.
+        $todos = Todo::paginate(3);
 
         return view('todos.index', compact('todos'));
     }
@@ -38,6 +41,12 @@ class TodoController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required|min:10'
+
+        ]);
+
         // store to todos table using model
         $todo = new Todo();
         $todo->title = $request->title;
@@ -67,6 +76,8 @@ class TodoController extends Controller
 
     public function show(Todo $todo)
     {
+        $this->authorize('show, $todo');
+
         return view('todos.show', compact('todo'));
     }
 
@@ -100,6 +111,18 @@ class TodoController extends Controller
         return redirect()->to('/todos')->with([
             'type' => 'alert-danger',
             'message' => 'Successfuly delete your todo!'
+        ]);
+    }
+
+    public function forceDelete(Todo $todo)
+    {
+        // force delete from database
+        $todo->forceDelete();
+
+        // return to todos index
+        return redirect()->to('/todos')->with([
+            'type' => 'alert-danger',
+            'message' => 'Successfuly force delete your todo!'
         ]);
     }
 }

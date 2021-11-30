@@ -11,9 +11,11 @@
             @endif
             <div class="card">
                 <div class="card-header">
-                    {{ __('Ejen Index') }}
+                    {{ __('Ejen Permohonan Index') }}
 
                     <div class="float-right">
+
+                        <a class="btn btn-"
                         <form action="" method="">
                             <div class="input-group">
                                 <input type="text" class="form-control" name="keyword" value="{{ request()->get('keyword') }}">
