@@ -7,7 +7,8 @@ use App\Models\Todo;
 use File;
 use Storage;
 use Mail;
-use App\Mail\TodoCreatedMail;
+//use App\Mail\TodoCreatedMail;
+use App\Jobs\SendEmailJob;
 
 class TodoController extends Controller
 {
@@ -68,8 +69,8 @@ class TodoController extends Controller
             $todo->save();
         }
         
-        // send email to user
-        Mail::to('blixee@gmail.com')->send(new TodoCreatedMail($todo));
+        // send email pakai job
+        dispatch(new SendEmailJob($todo));
 
         // return todos index
         return redirect()->to('/todos')->with([

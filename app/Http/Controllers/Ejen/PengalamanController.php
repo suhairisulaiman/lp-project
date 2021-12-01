@@ -1,4 +1,4 @@
-<?php
+<!-- <?php
 
 namespace App\Http\Controllers\Ejen;
 
@@ -10,14 +10,14 @@ class PermohonanController extends Controller
 {
     public function index()
     {
-        return view('ejen.index', compact('ejen'));
+        return view('ejen.permohonan.index', compact('senarai_permohonan'));
     }
 
-    // public function create()
-    // {
-    //     // show create form
-    //     return view('ejen.permohonan.create');
-    // }
+    public function create()
+    {
+        // show create form
+        return view('ejen.permohonan.create');
+    }
 
     public function store(Request $request)
     {
@@ -27,10 +27,10 @@ class PermohonanController extends Controller
         $permohonan->save();
 
         // return permohonan index
-        return redirect()->to('/ejen')->with([
+        return redirect()->to('/ejen/senarai-permohonan')->with([
             'type' => 'alert-primary',
             'message' => 'Berjaya simpan Ejen'
         ]);
 
     }
-}
+} -->

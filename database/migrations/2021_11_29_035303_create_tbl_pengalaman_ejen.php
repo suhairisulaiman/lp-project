@@ -15,6 +15,10 @@ class CreateTblPengalamanEjen extends Migration
     {
         Schema::create('tbl_pengalaman_ejen', function (Blueprint $table) {
             $table->id();
+            
+            $table->string('jawatan_ejen');
+            $table->string('tempoh_pengalaman');
+            $table->string('bidang');
 
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

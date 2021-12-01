@@ -30,6 +30,10 @@ Route::post('/todos/{todo}/edit', [App\Http\Controllers\TodoController::class, '
 Route::get('/todos/{todo}/delete', [App\Http\Controllers\TodoController::class, 'delete']);
 Route::get('/todos/{todo}/force-delete', [App\Http\Controllers\TodoController::class, 'forceDelete']);
 
-Route::get('/ejen/senarai-permohonan', [App\Http\Controllers\Ejen\PermohonanController::class, 'index']);
-Route::get('/ejen/senarai-permohonan/create', [App\Http\Controllers\Ejen\PermohonanController::class, 'create'])->middleware('auth');
-Route::post('/ejen/senarai-permohonan/store', [App\Http\Controllers\Ejen\PermohonanController::class, 'store']);
+Route::get('/ejen', [App\Http\Controllers\Ejen\PermohonanController::class, 'index']);
+//Route::get('/ejen/senarai-permohonan/create', [App\Http\Controllers\Ejen\PermohonanController::class, 'create'])->middleware('auth');
+//Route::post('/ejen/kategori-permohonan/store', [App\Http\Controllers\Ejen\PermohonanController::class, 'store']);
+
+// Route::get('/lp/senarai-permohonan', [App\Http\Controllers\LP\PermohonanController::class, 'index'])->middleware('[auth','lp']);
+// Route::get('/lp/senarai-permohonan/create', [App\Http\Controllers\LP\PermohonanController::class, 'create'])->middleware('[auth','lp']);
+// Route::post('/lp/senarai-permohonan/store', [App\Http\Controllers\LP\PermohonanController::class, 'store']);->middleware('[auth','lp']);

@@ -6,9 +6,9 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
-use App\Mail\Todo;
+use App\Models\Todo;
 
-class TodoCreated extends Mailable
+class TodoCreatedMail extends Mailable
 
 {
     use Queueable, SerializesModels;

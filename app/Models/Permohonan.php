@@ -9,6 +9,11 @@ class Permohonan extends Model
 {
     use HasFactory;
 
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User');
+    }    
+
     protected $table = 'tbl_permohonan';
     
     public function user()
