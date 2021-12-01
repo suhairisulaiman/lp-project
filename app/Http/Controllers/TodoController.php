@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Models\Todo;
 use File;
 use Storage;
+use Mail;
+use App\Mail\TodoCreatedMail;
 
 class TodoController extends Controller
 {
@@ -17,18 +19,18 @@ class TodoController extends Controller
 
     public function index(Request $request)
     {
-        if($request->keyword){
-            $user = auth()->user();
-            $todos = $user->todos()
-                        ->where('title','LIKE','%'.$request->keyword.'%')
-                        ->paginate(3);
-        }else{
-            $user = auth()->user();
-            $todos = $user->todos()->paginate(3);
-        }
+        // if($request->keyword){
+        //     $user = auth()->user();
+        //     $todos = $user->todos()
+        //                 ->where('title','LIKE','%'.$request->keyword.'%')
+        //                 ->paginate(3);
+        // }else{
+        //     $user = auth()->user();
+        //     $todos = $user->todos()->paginate(3);
+        // }
         
         // paginate sini akan overwrite yang atas, jadi kena letak juga kat sini.
-        $todos = Todo::paginate(3);
+        $todos = Todo::paginate();
 
         return view('todos.index', compact('todos'));
     }
@@ -42,7 +44,7 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
+            'title' => 'required|unique:todos,title|min:4',
             'description' => 'required|min:10'
 
         ]);
@@ -65,6 +67,9 @@ class TodoController extends Controller
             $todo->attachment = $filename;
             $todo->save();
         }
+        
+        // send email to user
+        Mail::to('blixee@gmail.com')->send(new TodoCreatedMail($todo));
 
         // return todos index
         return redirect()->to('/todos')->with([
